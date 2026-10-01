@@ -95,39 +95,9 @@
   <aside class="cart-drawer" id="cartDrawer" aria-hidden="true"><div class="drawer-head"><h3>Votre panier</h3><button class="icon-btn" id="closeCart" aria-label="Fermer">×</button></div><div id="cartItems" class="cart-items"></div><div class="drawer-footer"><div class="cart-total"><span>Total</span><strong id="cartTotal">0 DA</strong></div><button id="checkoutBtn" class="btn btn-dark full">Commander sur WhatsApp</button><small>Le paiement se fait à la livraison. Nous confirmerons votre commande par message.</small></div></aside>
   <div class="overlay" id="overlay"></div>
 
-  <div class="modal checkout-modal" id="checkoutModal">
-  <div class="modal-card checkout-card">
-    <button class="modal-close" id="closeCheckout" aria-label="Fermer">×</button>
-    <div class="checkout-layout">
-      <div class="checkout-form-area">
-        <span class="eyebrow">COMMANDE TOP 1</span>
-        <h2>Finalisez votre commande</h2>
-        <p class="checkout-intro">Renseignez vos coordonnées. Nous vous contactons ensuite pour confirmer la livraison.</p>
-        <form id="checkoutForm" class="form-grid">
-          <label>Nom complet *<input name="customer_name" autocomplete="name" required placeholder="Votre nom et prénom"></label>
-          <label>Numéro de téléphone *<input name="phone" autocomplete="tel" required inputmode="tel" placeholder="05 / 06 / 07 ..."></label>
-          <label class="wide">Wilaya *<select name="wilaya" id="checkoutWilaya" required><option value="">Choisissez votre wilaya</option></select></label>
-          <label>Commune <input name="commune" autocomplete="address-level2" placeholder="Votre commune"></label>
-          <label>Adresse <input name="address" autocomplete="street-address" placeholder="Quartier, rue..."></label>
-          <label class="wide">Note (optionnel)<textarea name="notes" rows="3" placeholder="Information utile pour la livraison"></textarea></label>
-          <div class="wide checkout-assurance"><span>✓</span><div><strong>Paiement à la livraison</strong><small>Nous vérifions votre commande et vous appelons pour confirmer avant expédition.</small></div></div>
-          <button id="checkoutSubmit" class="btn btn-dark wide checkout-submit" type="submit" disabled>Confirmer ma commande</button>
-        </form>
-      </div>
-      <aside class="checkout-summary-card">
-        <div class="summary-head"><div><span class="eyebrow">RÉCAPITULATIF</span><h3>Votre commande</h3></div><span class="summary-secure">TOP 1</span></div>
-        <div id="checkoutItems" class="checkout-items"></div>
-        <div class="price-breakdown">
-          <div><span>Prix des produits</span><strong id="checkoutSubtotal">0 DA</strong></div>
-          <div><span>Livraison</span><strong id="checkoutDelivery">—</strong></div>
-          <div class="grand-total"><span>Total</span><strong id="checkoutTotal">0 DA</strong></div>
-        </div>
-        <div id="deliveryHint" class="delivery-hint">Choisissez votre wilaya pour calculer les frais de livraison.</div>
-      </aside>
-    </div>
-  </div>
-</div>
-<div class="toast" id="toast"></div> id="toast"></div>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1"></script>\n<script src="supabase-config.js"></script>\n<script src="script.js"></script>
+  <div class="toast" id="toast"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1"></script>
+<script src="supabase-config.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
