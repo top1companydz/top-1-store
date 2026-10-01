@@ -85,7 +85,7 @@
 
         <form id="productOrderForm" class="quick-order-form">
           <label>Nom complet <em>*</em><input name="customer_name" autocomplete="name" required placeholder="Votre nom et prénom"></label>
-          <label>Numéro de téléphone <em>*</em><input name="phone" autocomplete="tel" required inputmode="tel" placeholder="05 / 06 / 07 ..."></label>
+          <label>Numéro de téléphone <em>*</em><input name="phone" type="tel" autocomplete="tel" required inputmode="tel" placeholder="05 / 06 / 07 ..."></label>
           <label>Wilaya <em>*</em><select name="wilaya" id="productWilaya" required><option value="">Sélectionnez votre wilaya</option></select></label>
 
           <div class="order-summary-box">
@@ -100,7 +100,7 @@
             <p id="orderDeliveryHint" class="delivery-hint">Sélectionnez votre wilaya pour calculer la livraison.</p>
           </div>
 
-          <button id="buyNow" class="buy-now-primary" type="submit" disabled>ACHETER MAINTENANT — 0 DA</button>
+          <button id="buyNow" class="buy-now-primary" type="submit">ACHETER MAINTENANT — 0 DA</button>
           <small class="order-note">Paiement à la livraison. Nous vous contacterons pour confirmer avant l’expédition.</small>
         </form>
 
@@ -145,6 +145,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1"></script>
   <script src="supabase-config.js"></script>
-  <script src="product.js?v=72"></script>
+  <script src="product.js?v=73"></script>
 </body>
 </html>
