@@ -127,6 +127,17 @@ function renderSpecs(specs){
   $('specTable').innerHTML=rows.length?rows.map(([k,v])=>'<div class="spec-row"><span>'+esc(k)+'</span><span>'+esc(v)+'</span></div>').join(''):'<div class="spec-empty">Les spécifications seront ajoutées prochainement.</div>';
 }
 
+async function loadRelatedProducts(){
+  const box=$('relatedGrid');
+  const section=$('relatedSection');
+  const r=await supabaseClient.from('products').select('id,name,price_dzd,image_url,is_featured,categories(name)').eq('is_active',true).neq('id',product.id).order('is_featured',{ascending:false}).order('created_at',{ascending:false}).limit(4);
+  if(r.error||!r.data?.length){section.hidden=true;return}
+  section.hidden=false;
+  box.innerHTML=r.data.map(p=>{
+    const image=p.image_url?'<img src="'+esc(p.image_url)+'" alt="'+esc(p.name)+'">':'<div class="related-placeholder">TOP 1</div>';
+    return '<article class="related-card"><a href="product.html?id='+encodeURIComponent(p.id)+'"><div class="related-image">'+image+'</div><div class="related-info"><small>'+esc(p.categories?.name||'Produit')+'</small><h3>'+esc(p.name)+'</h3><strong>'+money(p.price_dzd)+'</strong></div></a></article>';
+  }).join('');
+}
 function populateProductWilayas(){
   const select=$('productWilaya');
   select.innerHTML='<option value="">Choisissez votre wilaya</option>'+deliveryRates.map(r=>'<option value="'+esc(r.wilaya_code)+'">'+esc(r.wilaya_code)+' — '+esc(r.wilaya_name)+'</option>').join('');
@@ -203,22 +214,7 @@ function fallbackCopy(){const area=document.createElement('textarea');area.value
 
 function getCart(){try{return JSON.parse(localStorage.getItem('top1_cart')||'[]')}catch{return[]}}
 function saveCart(c){localStorage.setItem('top1_cart',JSON.stringify(c))}
-function renderProductCart(){
-  const cart=getCart(),box=$('productCartItems');
-  $('cartCount').textContent=cart.reduce((s,i)=>s+Number(i.qty||0),0);
-  $('productCartTotal').textContent=money(cart.reduce((s,i)=>s+Number(i.price||0)*Number(i.qty||0),0));
-  if(!cart.length){box.innerHTML='<div class="product-cart-empty">Votre panier est vide.</div>';return}
-  box.innerHTML=cart.map((i,idx)=>'<div class="product-cart-row"><div class="product-cart-thumb">'+(i.image_url?'<img src="'+esc(i.image_url)+'" alt="">':'<span>TOP 1</span>')+'</div><div class="product-cart-copy"><strong>'+esc(i.name)+'</strong>'+(i.selected_options&&Object.keys(i.selected_options).length?'<small>'+Object.entries(i.selected_options).map(([k,v])=>escapeOptionLabel(k)+': '+esc(v)).join(' · ')+'</small>':'')+'<small>'+money(i.price)+'</small><div class="product-cart-qty"><button type="button" data-cart-minus="'+idx+'">−</button><b>'+i.qty+'</b><button type="button" data-cart-plus="'+idx+'">+</button></div></div><strong>'+money(Number(i.price)*Number(i.qty))+'</strong></div>').join('');
-  box.querySelectorAll('[data-cart-minus]').forEach(b=>b.onclick=()=>changeProductCartQty(Number(b.dataset.cartMinus),-1));
-  box.querySelectorAll('[data-cart-plus]').forEach(b=>b.onclick=()=>changeProductCartQty(Number(b.dataset.cartPlus),1));
-}
-function escapeOptionLabel(k){return k==='size'?'Taille':'Couleur'}
-function changeProductCartQty(index,delta){const cart=getCart(),item=cart[index];if(!item)return;item.qty=Number(item.qty)+delta;if(item.qty<=0)cart.splice(index,1);saveCart(cart);renderProductCart()}
-function openProductCart(){renderProductCart();$('productCartDrawer').classList.add('open');$('productCartOverlay').classList.add('open');$('productCartDrawer').setAttribute('aria-hidden','false')}
-function closeProductCart(){$('productCartDrawer').classList.remove('open');$('productCartOverlay').classList.remove('open');$('productCartDrawer').setAttribute('aria-hidden','true')}
-function goToProductOrder(){closeProductCart();$('productOrderForm').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{const first=$('productWilaya');if(first&&!first.value)first.focus()},450)}
-function updateCartCount(){renderProductCart()}
-
+function updateCartCount(){const cart=getCart();$('cartCount').textContent=cart.reduce((sum,item)=>sum+Number(item.qty||0),0)}
 function updateContact(){
   const phone=(settings.whatsapp_phone||'213000000000').replace(/\D/g,'');
   $('whatsappFooter').href='https://wa.me/'+phone;
@@ -253,6 +249,7 @@ async function boot(){
     await loadProduct(id);
     render();
     $('productContent').hidden=false;
+    loadRelatedProducts().catch(err=>console.warn('Related products error',err));
     try{await loadSupportData();render();populateProductWilayas();updateOrderCalculator();updateContact()}catch(err){console.warn('Optional store data error',err)}
   }catch(err){
     console.error('TOP 1 product page fatal load',err);
