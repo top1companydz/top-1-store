@@ -109,7 +109,7 @@ function updateOrderPreview(){
   const opts=[];if(selectedOptions.size)opts.push('Taille : '+selectedOptions.size);if(selectedOptions.color)opts.push('Couleur : '+selectedOptions.color);$('miniProductOptions').textContent=opts.join(' · ');
   if(img){$('miniProductImage').src=img;$('miniProductImage').hidden=false;$('miniProductPlaceholder').hidden=true}else{$('miniProductImage').hidden=true;$('miniProductPlaceholder').hidden=false}
 }
-function updateBuyButton(){$('buyNow').textContent='ACHETER MAINTENANT — '+($('orderTotalPrice').textContent||money(product?.price_dzd||0))}
+function updateBuyButton(){$('buyNow').textContent='ACHETER MAINTENANT — '+($('orderTotalPrice').textContent||money(product?.price_dzd||0));$('buyNow').disabled=false}
 function updateOrderCalculator(){
   if(!product)return;
   const subtotal=Number(product.price_dzd||0)*qty,rate=selectedProductDelivery();
@@ -117,20 +117,49 @@ function updateOrderCalculator(){
   if(!rate||rate.delivery_price_dzd===null||rate.delivery_price_dzd===undefined){
     $('orderDeliveryPrice').textContent='?';$('orderTotalPrice').textContent=money(subtotal);
     $('orderDeliveryHint').textContent=$('productWilaya').value?'Tarif Yalidine non configuré pour cette wilaya.':'Sélectionnez votre wilaya pour calculer la livraison.';
-    $('buyNow').disabled=!requiredOptionsComplete()||!$('productWilaya').value;updateBuyButton();return;
+    updateBuyButton();return;
   }
   const delivery=Number(rate.delivery_price_dzd);$('orderDeliveryPrice').textContent=money(delivery);$('orderTotalPrice').textContent=money(subtotal+delivery);
   $('orderDeliveryHint').textContent='Expédition Yalidine vers '+rate.wilaya_name+' : '+money(delivery);
-  $('buyNow').disabled=!requiredOptionsComplete();updateBuyButton();
+  updateBuyButton();
 }
 
 function orderSummaryText(data,form){const rate=selectedProductDelivery();return 'TOP 1 — Commande #'+(data?.order_number||'')+'\nProduit : '+product.name+' × '+qty+'\n'+(selectedOptions.size?'Taille : '+selectedOptions.size+'\n':'')+(selectedOptions.color?'Couleur : '+selectedOptions.color+'\n':'')+'Client : '+form.get('customer_name')+'\nTéléphone : '+form.get('phone')+'\nWilaya : '+(data?.wilaya||rate?.wilaya_name||'')+'\nPrix produits : '+money(data?.subtotal_dzd)+'\nLivraison Yalidine : '+money(data?.delivery_dzd)+'\nTotal : '+money(data?.total_dzd)}
 
+function setupOrderValidation(){
+  const form=$('productOrderForm');
+  if(!form)return;
+  const fields=[
+    {selector:'[name="customer_name"]',message:'Veuillez entrer votre nom complet.'},
+    {selector:'[name="phone"]',message:'Veuillez entrer votre numéro de téléphone.'},
+    {selector:'[name="wilaya"]',message:'Veuillez sélectionner votre wilaya.'}
+  ];
+  fields.forEach(({selector,message})=>{
+    const field=form.querySelector(selector);
+    if(!field)return;
+    const setMessage=()=>{if(!String(field.value||'').trim())field.setCustomValidity(message);else field.setCustomValidity('')};
+    field.addEventListener('invalid',setMessage);
+    field.addEventListener('input',()=>{field.setCustomValidity('')});
+    field.addEventListener('change',()=>{field.setCustomValidity('')});
+  });
+}
+function validateOrderForm(){
+  const form=$('productOrderForm');
+  if(!form)return false;
+  const name=form.elements.customer_name, phone=form.elements.phone, wilaya=form.elements.wilaya;
+  [name,phone,wilaya].forEach(x=>x?.setCustomValidity(''));
+  if(!String(name.value||'').trim()){name.setCustomValidity('Veuillez entrer votre nom complet.');name.reportValidity();return false}
+  if(!String(phone.value||'').trim()){phone.setCustomValidity('Veuillez entrer votre numéro de téléphone.');phone.reportValidity();return false}
+  if(!String(wilaya.value||'').trim()){wilaya.setCustomValidity('Veuillez sélectionner votre wilaya.');wilaya.reportValidity();return false}
+  return true;
+}
 async function submitProductOrder(e){
-  e.preventDefault();if(!requiredOptionsComplete()){toast('Sélectionnez la taille et la couleur.');return}
+  e.preventDefault();
+  if(!validateOrderForm())return;
+  if(!requiredOptionsComplete()){toast('Sélectionnez les options du produit avant de commander.');return}
   const form=e.target,fd=new FormData(form),rate=selectedProductDelivery();
   if(!rate||rate.delivery_price_dzd===null||rate.delivery_price_dzd===undefined){toast('Choisissez une wilaya avec un tarif Yalidine configuré.');return}
-  $('buyNow').disabled=true;$('buyNow').textContent='Enregistrement...';
+  $('buyNow').disabled=false;$('buyNow').textContent='ENREGISTREMENT EN COURS…';
   try{
     const data=await apiPost('/rest/v1/rpc/place_order',{p_customer_name:String(fd.get('customer_name')),p_phone:String(fd.get('phone')),p_wilaya:String(fd.get('wilaya')),p_commune:'',p_address:'',p_notes:'',p_items:[{product_id:product.id,quantity:qty,selected_options:{...selectedOptions}}]});
     lastOrderText=orderSummaryText(data,fd);$('successOrderNumber').textContent='#'+(data?.order_number||'');$('successSummary').textContent=lastOrderText;$('orderSuccess').hidden=false;form.hidden=true;
@@ -160,6 +189,7 @@ function attachEvents(){
   $('addToCart').onclick=addToCart;
   $('productOrderForm').onsubmit=submitProductOrder;
   $('copyOrder').onclick=copyOrderSummary;
+  setupOrderValidation();
 }
 
 async function loadRelatedProducts(){
