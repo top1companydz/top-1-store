@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="TOP 1 — vêtements, jouets, décoration, vêtements de travail et articles de maison en Algérie." />
+  <title>TOP 1 — Tout ce qu'il vous faut</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="topbar">🚚 Livraison partout en Algérie • 💳 Paiement à la livraison • 📱 Commande rapide sur WhatsApp</div>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <button class="icon-btn mobile-menu" id="mobileMenuBtn" aria-label="Ouvrir le menu">☰</button>
+      <a class="brand" href="#top" aria-label="TOP 1 accueil">
+        <span class="brand-mark">1</span>
+        <span><strong>TOP 1</strong><small>DZ</small></span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#categories">Catégories</a>
+        <a href="#featured">Nouveautés</a>
+        <a href="#why-us">Pourquoi nous</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="searchBtn" aria-label="Rechercher">⌕</button>
+        <button class="icon-btn cart-btn" id="cartBtn" aria-label="Panier">🛒<span id="cartCount">0</span></button>
+      </div>
+    </div>
+    <div class="search-bar container" id="searchBar" hidden>
+      <input id="searchInput" type="search" placeholder="Rechercher un produit…" aria-label="Rechercher un produit" />
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero container">
+      <div class="hero-copy">
+        <span class="eyebrow">NOUVELLE BOUTIQUE • ALGÉRIE</span>
+        <h1>Le quotidien,<br><em>en mieux.</em></h1>
+        <p>Une sélection pratique et moderne de vêtements, workwear, jouets, décoration et articles de maison.</p>
+        <div class="hero-actions">
+          <a href="#featured" class="btn btn-dark">Découvrir la sélection <span>↗</span></a>
+          <a href="#categories" class="text-link">Voir les catégories</a>
+        </div>
+        <div class="mini-trust">
+          <span>✓ Produits sélectionnés</span>
+          <span>✓ Paiement à la livraison</span>
+        </div>
+      </div>
+      <div class="hero-art" aria-label="Illustration de produits et colis">
+        <div class="arch"></div>
+        <div class="floating-card card-a"><span>WORKWEAR</span><strong>Prêt pour le terrain.</strong></div>
+        <div class="floating-card card-b"><span>HOME</span><strong>Simple. Utile. Beau.</strong></div>
+        <div class="box box-one"><div>TOP 1</div></div>
+        <div class="shirt"></div>
+        <div class="boot"></div>
+        <div class="plant"></div>
+      </div>
+    </section>
+
+    <section class="ticker"><div class="ticker-track">TOP 1 &nbsp; • &nbsp; MODE &nbsp; • &nbsp; MAISON &nbsp; • &nbsp; WORKWEAR &nbsp; • &nbsp; JOUETS &nbsp; • &nbsp; LIVRAISON EN ALGÉRIE &nbsp; • &nbsp; TOP 1 &nbsp; • &nbsp;</div></section>
+
+    <section class="section container" id="categories">
+      <div class="section-head"><div><span class="eyebrow">EXPLOREZ</span><h2>Une boutique.<br><em>Cinq univers.</em></h2></div><a class="text-link" href="#featured">Voir les produits →</a></div>
+      <div class="category-grid">
+        <button class="category-card cat-fashion" data-category="Vêtements"><span>01</span><div><small>STYLE</small><h3>Vêtements</h3><p>Pièces faciles à porter, pour tous les jours.</p></div><b>↗</b></button>
+        <button class="category-card cat-toys" data-category="Jouets"><span>02</span><div><small>PLAY</small><h3>Jouets</h3><p>Des idées pour jouer, créer et apprendre.</p></div><b>↗</b></button>
+        <button class="category-card cat-home" data-category="Maison"><span>03</span><div><small>HOME</small><h3>Décoration</h3><p>Petits détails qui changent l’ambiance.</p></div><b>↗</b></button>
+        <button class="category-card cat-work" data-category="Workwear"><span>04</span><div><small>PRO</small><h3>Workwear</h3><p>Confort et protection pour le travail.</p></div><b>↗</b></button>
+        <button class="category-card cat-kitchen" data-category="Maison & Cuisine"><span>05</span><div><small>EVERYDAY</small><h3>Maison & cuisine</h3><p>Des articles utiles pour tous les jours.</p></div><b>↗</b></button>
+      </div>
+    </section>
+
+    <section class="section featured" id="featured">
+      <div class="container">
+        <div class="section-head"><div><span class="eyebrow">SÉLECTION</span><h2>Nos incontournables</h2></div><div class="filters" id="filters"><button class="filter active" data-filter="Tous">Tous</button><button class="filter" data-filter="Workwear">Workwear</button><button class="filter" data-filter="Maison">Maison</button><button class="filter" data-filter="Vêtements">Mode</button><button class="filter" data-filter="Jouets">Jouets</button></div></div>
+        <div class="product-grid" id="productGrid"></div>
+      </div>
+    </section>
+
+    <section class="editorial container">
+      <div class="editorial-image decor-art"><div class="decor-lamp"></div><div class="decor-vase"></div><div class="decor-table"></div></div>
+      <div class="editorial-copy"><span class="eyebrow">LE CHOIX TOP 1</span><h2>Des produits utiles.<br><em>Un style qui dure.</em></h2><p>Notre objectif est simple : réunir des produits intéressants au même endroit, avec une expérience d'achat claire et rapide.</p><a class="btn btn-outline" href="#why-us">Pourquoi TOP 1 ?</a></div>
+    </section>
+
+    <section class="section values" id="why-us"><div class="container"><div class="section-head"><div><span class="eyebrow">PROMESSE TOP 1</span><h2>Moins de complications.<br><em>Plus de confiance.</em></h2></div></div><div class="value-grid"><div><span>01</span><h3>Sélection simple</h3><p>Des catégories claires et des produits faciles à comprendre.</p></div><div><span>02</span><h3>Commande rapide</h3><p>Ajoutez au panier et envoyez votre commande directement sur WhatsApp.</p></div><div><span>03</span><h3>Paiement à la livraison</h3><p>Une expérience pensée pour les achats en ligne en Algérie.</p></div><div><span>04</span><h3>Support humain</h3><p>Une question ? Contactez-nous directement avant de commander.</p></div></div></div></section>
+
+    <section class="newsletter"><div class="container newsletter-wrap"><div><span class="eyebrow">RESTEZ AU COURANT</span><h2>Nouveautés & bonnes affaires.</h2></div><form id="newsletterForm"><input type="email" required placeholder="Votre adresse email" aria-label="Votre adresse email"><button class="btn btn-dark" type="submit">S'inscrire</button></form></div></section>
+  </main>
+
+  <footer id="contact"><div class="container footer-grid"><div><a class="brand footer-brand" href="#top"><span class="brand-mark">1</span><span><strong>TOP 1</strong><small>DZ</small></span></a><p>Mode, maison, workwear, jouets et quotidien — sélectionnés pour l'Algérie.</p></div><div><h4>Boutique</h4><a href="#categories">Catégories</a><a href="#featured">Produits</a><a href="#why-us">Pourquoi nous</a></div><div><h4>Aide</h4><a href="#contact">Livraison</a><a href="#contact">Paiement</a><a href="#contact">Retours</a></div><div><h4>Contact</h4><a id="whatsappFooter" href="#">WhatsApp</a><a href="mailto:contact@top1.example">Email</a><span>Alger, Algérie</span></div></div><div class="container footer-bottom"><span>© <span id="year"></span> TOP 1. Démo gratuite — contenu à personnaliser.</span><span>FR · DZD</span></div></footer>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true"><div class="drawer-head"><h3>Votre panier</h3><button class="icon-btn" id="closeCart" aria-label="Fermer">×</button></div><div id="cartItems" class="cart-items"></div><div class="drawer-footer"><div class="cart-total"><span>Total</span><strong id="cartTotal">0 DA</strong></div><button id="checkoutBtn" class="btn btn-dark full">Commander sur WhatsApp</button><small>Le paiement se fait à la livraison. Nous confirmerons votre commande par message.</small></div></aside>
+  <div class="overlay" id="overlay"></div>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
