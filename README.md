@@ -43,3 +43,6 @@ Row Level Security is enabled. Customers can read active catalog data and place 
 - Décoration
 - Workwear
 - Maison & cuisine
+
+### Product detail experience
+Each published product has its own detail page with a photo gallery, description, specifications, stock information, quantity selection, add-to-cart action, and related products. The admin dashboard supports multiple product photos and key/value specifications.
