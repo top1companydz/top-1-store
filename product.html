@@ -27,7 +27,7 @@
       </nav>
       <div class="nav-actions">
         <a class="icon-btn" href="index.html#featured" aria-label="Retour à la boutique">←</a>
-        <a class="icon-btn cart-btn" href="index.html#featured" aria-label="Panier">🛒<span id="cartCount">0</span></a>
+        <button class="icon-btn cart-btn" id="productCartBtn" type="button" aria-label="Ouvrir le panier">🛒<span id="cartCount">0</span></button>
       </div>
     </div>
   </header>
@@ -145,6 +145,19 @@
     <div class="container footer-bottom"><span>© <span id="year"></span> TOP 1.</span><span>FR · DZD</span></div>
   </footer>
 
+  <aside class="product-cart-drawer" id="productCartDrawer" aria-hidden="true">
+    <div class="drawer-head">
+      <div><span class="eyebrow">TOP 1</span><h3>Votre panier</h3></div>
+      <button class="icon-btn" id="closeProductCart" type="button" aria-label="Fermer">×</button>
+    </div>
+    <div id="productCartItems" class="cart-items"></div>
+    <div class="drawer-footer">
+      <div class="cart-total"><span>Total</span><strong id="productCartTotal">0 DA</strong></div>
+      <button id="productCartCheckout" class="btn btn-dark full" type="button">Passer la commande</button>
+      <small>Choisissez vos options puis complétez la commande sur cette page.</small>
+    </div>
+  </aside>
+  <div class="product-cart-overlay" id="productCartOverlay"></div>
   <div class="toast" id="toast"></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1"></script>
   <script src="supabase-config.js"></script>
