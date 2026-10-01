@@ -95,15 +95,10 @@
 
           <form id="productOrderForm" class="order-sheet-form">
             <div class="form-two">
-              <label><span class="field-label">👤 Nom <em>*</em></span><input name="customer_name" autocomplete="name" required placeholder="Nom"></label>
-              <label><span class="field-label">☎ Téléphone <em>*</em></span><input name="phone" autocomplete="tel" required inputmode="tel" placeholder="Téléphone"></label>
+              <label><span class="field-label">👤 Nom <em>*</em></span><input name="customer_name" autocomplete="name" required placeholder="Nom et prénom"></label>
+              <label><span class="field-label">☎ Téléphone <em>*</em></span><input name="phone" autocomplete="tel" required inputmode="tel" placeholder="05 / 06 / 07 ..."></label>
             </div>
-            <label><span class="field-label">📍 Wilaya <em>*</em></span><select name="wilaya" id="productWilaya" required><option value="">Wilaya</option></select></label>
-            <div class="form-two">
-              <label><span class="field-label">Commune</span><input name="commune" autocomplete="address-level2" placeholder="Commune"></label>
-              <label><span class="field-label">Adresse</span><input name="address" autocomplete="street-address" placeholder="Adresse de livraison"></label>
-            </div>
-            <label><span class="field-label">Note <small>(optionnel)</small></span><textarea name="notes" rows="2" placeholder="Une précision pour la livraison ?"></textarea></label>
+            <label><span class="field-label">📍 Wilaya <em>*</em></span><select name="wilaya" id="productWilaya" required><option value="">Choisissez votre wilaya</option></select></label>
 
             <div class="reference-delivery-note" id="orderDeliveryHint">Sélectionnez votre wilaya pour calculer les frais de livraison.</div>
 
