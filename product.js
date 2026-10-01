@@ -1,6 +1,34 @@
 let product=null,images=[],imageIndex=0,qty=1,settings={},deliveryRates=[],selectedOptions={},lastOrderText='';
 const $=id=>document.getElementById(id);const money=n=>new Intl.NumberFormat('fr-DZ',{maximumFractionDigits:0}).format(Number(n)||0)+' DA';const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));const toast=m=>{$('toast').textContent=m;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)};function imgUrl(path){return path?supabaseClient.storage.from('product-images').getPublicUrl(path).data.publicUrl:null}
-async function load(){const id=new URLSearchParams(location.search).get('id');if(!id){showError('Produit introuvable.');return}const [p,s,d]=await Promise.all([supabaseClient.from('products').select('*,categories(name,slug)').eq('id',id).eq('is_active',true).single(),supabaseClient.from('site_settings').select('key,value'),supabaseClient.from('delivery_rates').select('wilaya_code,wilaya_name,delivery_price_dzd').eq('is_active',true).order('wilaya_code')]);if(p.error||!p.data){showError('Ce produit n’est plus disponible.');return}product=p.data;deliveryRates=d.data||[];(s.data||[]).forEach(x=>settings[x.key]=x.value);const g=await supabaseClient.from('product_images').select('*').eq('product_id',product.id).order('sort_order').order('created_at');images=(g.data||[]).map(x=>({id:x.id,url:imgUrl(x.storage_path),alt:x.alt_text||product.name,variant_color:x.variant_color||null}));if(product.image_url&&!images.some(x=>x.url===product.image_url))images.unshift({url:product.image_url,alt:product.name});render();await loadRelated();updateContact();populateProductWilayas();updateOrderCalculator()}
+async function load(){
+  try{
+    const id=new URLSearchParams(location.search).get('id');
+    if(!id){showError('Produit introuvable.');return}
+    const [p,s,d]=await Promise.all([
+      supabaseClient.from('products').select('*,categories(name,slug)').eq('id',id).eq('is_active',true).single(),
+      supabaseClient.from('site_settings').select('key,value'),
+      supabaseClient.from('delivery_rates').select('wilaya_code,wilaya_name,delivery_price_dzd').eq('is_active',true).order('wilaya_code')
+    ]);
+    if(p.error||!p.data){console.error('Product load error',p.error);showError('Impossible de charger ce produit.');return}
+    if(s.error)console.warn('Settings load error',s.error);
+    if(d.error)console.warn('Delivery rates load error',d.error);
+    product=p.data;
+    deliveryRates=d.data||[];
+    (s.data||[]).forEach(x=>settings[x.key]=x.value);
+    const g=await supabaseClient.from('product_images').select('*').eq('product_id',product.id).order('sort_order').order('created_at');
+    if(g.error)console.warn('Gallery load error',g.error);
+    images=(g.data||[]).map(x=>({id:x.id,url:imgUrl(x.storage_path),alt:x.alt_text||product.name,variant_color:x.variant_color||null}));
+    if(product.image_url&&!images.some(x=>x.url===product.image_url))images.unshift({url:product.image_url,alt:product.name});
+    render();
+    loadRelated().catch(err=>console.warn('Related products error',err));
+    updateContact();
+    populateProductWilayas();
+    updateOrderCalculator();
+  }catch(err){
+    console.error('TOP 1 product page error',err);
+    showError('Une erreur est survenue. Actualisez la page.');
+  }
+}
 function showError(m){$('productState').textContent=m}
 function render(){document.title=product.name+' — TOP 1';$('pageTitle').textContent=product.name+' — TOP 1';$('metaDescription').setAttribute('content',(product.description||'Découvrez '+product.name)+' — TOP 1 Algérie.');$('productState').hidden=true;$('productContent').hidden=false;$('detailsSection').hidden=false;$('productName').textContent=product.name;$('productCategory').textContent=product.categories?.name||'Produit';$('productSku').textContent=product.sku?'SKU · '+product.sku:'';$('productBadge').hidden=!product.is_featured;$('productDescriptionShort').textContent=(product.description||'').split(/\n+/)[0]||'Découvrez les détails de ce produit TOP 1.';$('productPrice').textContent=money(product.price_dzd);if(product.compare_at_price_dzd&&Number(product.compare_at_price_dzd)>Number(product.price_dzd)){$('productCompare').textContent=money(product.compare_at_price_dzd);$('productCompare').hidden=false}else $('productCompare').hidden=true;const stock=Number(product.stock_qty||0);$('stockMessage').textContent=stock>0?(stock<5?'Plus que '+stock+' en stock.':'Disponible en stock.'):'Rupture de stock';$('stockMessage').classList.toggle('out',stock<=0);$('addToCart').disabled=stock<=0;$('buyNow').disabled=stock<=0;$('qtyPlus').disabled=stock<=0;renderVariantOptions();renderImages();updateOrderCalculator();$('fullDescription').textContent=product.description||'Aucune description détaillée pour le moment.';renderSpecs(product.specifications||{});$('year').textContent=new Date().getFullYear();$('qtyValue').value=qty}
 function populateProductWilayas(){const select=$('productWilaya');if(!select)return;select.innerHTML='<option value="">Choisissez votre wilaya</option>'+deliveryRates.map(r=>'<option value="'+esc(r.wilaya_code)+'">'+esc(r.wilaya_code)+' — '+esc(r.wilaya_name)+'</option>').join('');select.onchange=updateOrderCalculator}
@@ -26,7 +54,7 @@ function renderVariantOptions(){
     box.innerHTML='';
     $('addToCart').disabled=!available;
     $('buyNow').disabled=!available;
-    if(type==='color')updateColorImage();updateOrderPreview();updateBuyButton();
+    updateOrderPreview();updateBuyButton();
     return;
   }
   box.innerHTML=groups.map(g=>'<div class="variant-group"><div class="variant-label">'+g.label+'</div><div class="variant-choices">'+g.values.map((value,i)=>'<div class="variant-choice"><input type="radio" id="opt-'+g.key+'-'+i+'" name="option-'+g.key+'" value="'+esc(value)+'"><label for="opt-'+g.key+'-'+i+'">'+esc(value)+'</label></div>').join('')+'</div></div>').join('')+'<div class="variant-hint" id="variantHint">Veuillez sélectionner '+groups.map(g=>g.label.toLowerCase()).join(' et ')+'.</div>';
