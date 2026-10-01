@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" id="metaDescription" content="TOP 1 — Détails du produit." />
+  <title id="pageTitle">TOP 1 — Produit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="product.css" />
+</head>
+<body>
+  <div class="topbar">🚚 Livraison partout en Algérie • 💳 Paiement à la livraison • 📱 Commande rapide sur WhatsApp</div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="TOP 1 accueil">
+        <span class="brand-mark">1</span>
+        <span><strong>TOP 1</strong><small>DZ</small></span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html#categories">Catégories</a>
+        <a href="index.html#featured">Produits</a>
+        <a href="index.html#why-us">Pourquoi nous</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="icon-btn" href="index.html#featured" aria-label="Retour à la boutique">←</a>
+        <a class="icon-btn cart-btn" href="index.html#featured" aria-label="Panier">🛒<span id="cartCount">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="product-page container">
+    <div id="productState" class="product-state">Chargement du produit…</div>
+
+    <section id="productContent" class="product-detail" hidden>
+      <div class="gallery">
+        <div class="gallery-main">
+          <button class="gallery-arrow left" id="prevImage" aria-label="Photo précédente">‹</button>
+          <img id="mainImage" alt="" />
+          <div id="mainPlaceholder" class="gallery-placeholder" hidden>TOP 1</div>
+          <button class="gallery-arrow right" id="nextImage" aria-label="Photo suivante">›</button>
+          <span id="imageCounter" class="image-counter"></span>
+        </div>
+        <div id="thumbnailStrip" class="thumbnail-strip"></div>
+      </div>
+
+      <div class="product-summary">
+        <div class="breadcrumbs"><a href="index.html">Accueil</a><span>›</span><span id="productCategory"></span></div>
+        <span id="productBadge" class="detail-badge" hidden>TOP 1</span>
+        <span id="productSku" class="detail-sku"></span>
+        <h1 id="productName"></h1>
+        <p id="productDescriptionShort" class="detail-lead"></p>
+
+        <div class="price-row">
+          <strong id="productPrice" class="detail-price"></strong>
+          <span id="productCompare" class="detail-compare" hidden></span>
+        </div>
+
+        <div id="stockMessage" class="stock-message"></div>
+
+        <div class="purchase-box">
+          <div class="quantity-control">
+            <button id="qtyMinus" aria-label="Diminuer la quantité">−</button>
+            <span id="qtyValue">1</span>
+            <button id="qtyPlus" aria-label="Augmenter la quantité">+</button>
+          </div>
+          <button id="addToCart" class="btn btn-dark purchase-btn">Ajouter au panier</button>
+        </div>
+        <button id="buyNow" class="buy-now">Commander ce produit sur WhatsApp ↗</button>
+
+        <div class="trust-grid">
+          <div><span>✓</span><strong>Paiement à la livraison</strong><small>Selon les conditions de livraison affichées</small></div>
+          <div><span>✓</span><strong>Livraison en Algérie</strong><small>Wilaya et commune à renseigner à la commande</small></div>
+          <div><span>✓</span><strong>Support TOP 1</strong><small>Une question ? Contactez-nous avant d’acheter</small></div>
+          <div><span>✓</span><strong>Commande simple</strong><small>Panier + WhatsApp pour finaliser rapidement</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="detailsSection" class="detail-section" hidden>
+      <div class="detail-tabs">
+        <button class="detail-tab active" data-tab="description">Description</button>
+        <button class="detail-tab" data-tab="specifications">Spécifications</button>
+        <button class="detail-tab" data-tab="delivery">Livraison & commande</button>
+      </div>
+      <div class="detail-panel active" id="panel-description">
+        <h2>À propos de ce produit</h2>
+        <div id="fullDescription" class="rich-text"></div>
+      </div>
+      <div class="detail-panel" id="panel-specifications">
+        <h2>Spécifications</h2>
+        <div id="specTable" class="spec-table"></div>
+      </div>
+      <div class="detail-panel" id="panel-delivery">
+        <h2>Livraison & commande</h2>
+        <div class="delivery-grid">
+          <div><strong>1.</strong><p>Ajoutez le produit au panier.</p></div>
+          <div><strong>2.</strong><p>Renseignez vos coordonnées et votre adresse.</p></div>
+          <div><strong>3.</strong><p>Nous vérifions la disponibilité et confirmons votre commande.</p></div>
+          <div><strong>4.</strong><p>Le paiement se fait à la livraison, selon les conditions communiquées.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="relatedSection" class="related-section" hidden>
+      <div class="section-head">
+        <div><span class="eyebrow">VOUS AIMEREZ AUSSI</span><h2>Produits similaires</h2></div>
+        <a class="text-link" href="index.html#featured">Voir toute la sélection →</a>
+      </div>
+      <div id="relatedGrid" class="related-grid"></div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container footer-grid">
+      <div><a class="brand footer-brand" href="index.html"><span class="brand-mark">1</span><span><strong>TOP 1</strong><small>DZ</small></span></a><p>Mode, maison, workwear, jouets et quotidien — sélectionnés pour l'Algérie.</p></div>
+      <div><h4>Boutique</h4><a href="index.html#categories">Catégories</a><a href="index.html#featured">Produits</a><a href="index.html#why-us">Pourquoi nous</a></div>
+      <div><h4>Aide</h4><a href="index.html#contact">Livraison</a><a href="index.html#contact">Paiement</a><a href="index.html#contact">Retours</a></div>
+      <div><h4>Contact</h4><a id="whatsappFooter" href="#">WhatsApp</a><a href="mailto:contact@top1.example">Email</a><span>Alger, Algérie</span></div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> TOP 1.</span><span>FR · DZD</span></div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1"></script>
+  <script src="supabase-config.js"></script>
+  <script src="product.js"></script>
+</body>
+</html>
