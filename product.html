@@ -47,57 +47,71 @@
         <div id="thumbnailStrip" class="thumbnail-strip"></div>
       </div>
 
-      <div class="product-summary">
+      <div class="product-summary reference-summary">
         <div class="breadcrumbs"><a href="index.html">Accueil</a><span>›</span><span id="productCategory"></span></div>
-        <span id="productBadge" class="detail-badge" hidden>TOP 1</span>
-        <span id="productSku" class="detail-sku"></span>
-        <h1 id="productName"></h1>
-        <p id="productDescriptionShort" class="detail-lead"></p>
+        <div class="reference-title-row">
+          <div>
+            <span id="productBadge" class="detail-badge" hidden>TOP 1</span>
+            <span id="productSku" class="detail-sku"></span>
+            <h1 id="productName"></h1>
+            <p id="productDescriptionShort" class="detail-lead"></p>
+          </div>
+        </div>
 
-        <div class="price-row">
+        <div class="reference-price-row">
           <strong id="productPrice" class="detail-price"></strong>
           <span id="productCompare" class="detail-compare" hidden></span>
         </div>
-
         <div id="stockMessage" class="stock-message"></div>
 
         <div id="variantOptions" class="variant-options"></div>
-        <div class="purchase-box">
-          <div class="quantity-control">
-            <button id="qtyMinus" aria-label="Diminuer la quantité">−</button>
-            <span id="qtyValue">1</span>
-            <button id="qtyPlus" aria-label="Augmenter la quantité">+</button>
+
+        <div class="reference-order-preview">
+          <div class="preview-product">
+            <div class="preview-thumb"><img id="miniProductImage" alt="" hidden /><span id="miniProductPlaceholder">TOP 1</span></div>
+            <div class="preview-copy">
+              <strong id="miniProductName"></strong>
+              <small id="miniProductOptions"></small>
+              <span><b id="miniProductQty">1</b> article</span>
+            </div>
+            <strong id="miniProductLine">0 DA</strong>
           </div>
-          <button id="addToCart" class="btn btn-dark purchase-btn">Ajouter au panier</button>
+          <div class="reference-totals">
+            <div><span>Sous-total</span><strong id="orderProductPrice">0 DA</strong></div>
+            <div><span>Expédition</span><strong id="orderDeliveryPrice">?</strong></div>
+            <div class="reference-grand-total"><span>Total</span><strong id="orderTotalPrice">0 DA</strong></div>
+          </div>
         </div>
 
-        <a id="whatsappProduct" class="whatsapp-product" href="#" target="_blank" rel="noopener">WhatsApp — Nous contacter ↗</a>
-
-        <section class="order-sheet" aria-label="Formulaire de commande">
+        <section class="order-sheet reference-order-sheet" aria-label="Formulaire de commande">
           <div class="order-sheet-head">
-            <div><span class="eyebrow">COMMANDE DIRECTE</span><h2>Achetez ce produit</h2><p>Remplissez vos coordonnées. Votre commande sera enregistrée et notre équipe vous contactera pour confirmer la livraison.</p></div>
+            <div>
+              <span class="eyebrow">COMMANDE</span>
+              <h2>Finalisez votre achat</h2>
+              <p>Remplissez vos informations. Nous vous contacterons pour confirmer la commande et la livraison.</p>
+            </div>
             <span class="order-sheet-badge">YALIDINE</span>
           </div>
+
           <form id="productOrderForm" class="order-sheet-form">
             <div class="form-two">
-              <label>Nom complet *<input name="customer_name" autocomplete="name" required placeholder="Nom et prénom"></label>
-              <label>Téléphone *<input name="phone" autocomplete="tel" required inputmode="tel" placeholder="05 / 06 / 07 ..."></label>
+              <label><span class="field-label">👤 Nom <em>*</em></span><input name="customer_name" autocomplete="name" required placeholder="Nom"></label>
+              <label><span class="field-label">☎ Téléphone <em>*</em></span><input name="phone" autocomplete="tel" required inputmode="tel" placeholder="Téléphone"></label>
             </div>
+            <label><span class="field-label">📍 Wilaya <em>*</em></span><select name="wilaya" id="productWilaya" required><option value="">Wilaya</option></select></label>
             <div class="form-two">
-              <label>Wilaya *<select name="wilaya" id="productWilaya" required><option value="">Choisissez votre wilaya</option></select></label>
-              <label>Commune<input name="commune" autocomplete="address-level2" placeholder="Votre commune"></label>
+              <label><span class="field-label">Commune</span><input name="commune" autocomplete="address-level2" placeholder="Commune"></label>
+              <label><span class="field-label">Adresse</span><input name="address" autocomplete="street-address" placeholder="Adresse de livraison"></label>
             </div>
-            <label>Adresse de livraison<input name="address" autocomplete="street-address" placeholder="Quartier, rue, numéro..."></label>
-            <label>Note (optionnel)<textarea name="notes" rows="3" placeholder="Une précision pour la livraison ?"></textarea></label>
+            <label><span class="field-label">Note <small>(optionnel)</small></span><textarea name="notes" rows="2" placeholder="Une précision pour la livraison ?"></textarea></label>
 
-            <div class="order-calculator">
-              <div><span>Produit</span><strong id="orderProductPrice">0 DA</strong></div>
-              <div><span>Livraison Yalidine</span><strong id="orderDeliveryPrice">—</strong></div>
-              <div class="order-total"><span>Total à payer</span><strong id="orderTotalPrice">0 DA</strong></div>
-              <p id="orderDeliveryHint">Sélectionnez votre wilaya pour calculer automatiquement la livraison.</p>
-            </div>
+            <div class="reference-delivery-note" id="orderDeliveryHint">Sélectionnez votre wilaya pour calculer les frais de livraison.</div>
 
-            <button id="buyNow" class="btn btn-dark buy-now order-submit" type="submit">Acheter maintenant</button>
+            <button id="qtyMinus" class="hidden-control" type="button" aria-label="Diminuer la quantité">−</button>
+            <input type="hidden" id="qtyValue" value="1" />
+            <button id="qtyPlus" class="hidden-control" type="button" aria-label="Augmenter la quantité">+</button>
+
+            <button id="buyNow" class="btn btn-dark order-submit reference-buy" type="submit" disabled>ACHETER MAINTENANT — 0 DA</button>
           </form>
 
           <div id="orderSuccess" class="order-success" hidden>
@@ -113,12 +127,7 @@
           </div>
         </section>
 
-        <div class="trust-grid">
-          <div><span>✓</span><strong>Paiement à la livraison</strong><small>Selon les conditions de livraison affichées</small></div>
-          <div><span>✓</span><strong>Livraison en Algérie</strong><small>Wilaya et commune à renseigner à la commande</small></div>
-          <div><span>✓</span><strong>Support TOP 1</strong><small>Une question ? Contactez-nous avant d’acheter</small></div>
-          <div><span>✓</span><strong>Commande simple</strong><small>Panier + WhatsApp pour finaliser rapidement</small></div>
-        </div>
+        <a id="whatsappProduct" class="whatsapp-product reference-whatsapp" href="#" target="_blank" rel="noopener">WhatsApp — Nous contacter ↗</a>
       </div>
     </section>
 
@@ -139,10 +148,10 @@
       <div class="detail-panel" id="panel-delivery">
         <h2>Livraison & commande</h2>
         <div class="delivery-grid">
-          <div><strong>1.</strong><p>Ajoutez le produit au panier.</p></div>
-          <div><strong>2.</strong><p>Renseignez vos coordonnées et votre adresse.</p></div>
-          <div><strong>3.</strong><p>Nous vérifions la disponibilité et confirmons votre commande.</p></div>
-          <div><strong>4.</strong><p>Le paiement se fait à la livraison, selon les conditions communiquées.</p></div>
+          <div><strong>1.</strong><p>Choisissez vos options.</p></div>
+          <div><strong>2.</strong><p>Renseignez vos coordonnées et votre wilaya.</p></div>
+          <div><strong>3.</strong><p>Le total est calculé avec l'expédition.</p></div>
+          <div><strong>4.</strong><p>Nous vous contactons pour confirmer.</p></div>
         </div>
       </div>
     </section>
