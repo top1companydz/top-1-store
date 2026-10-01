@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+<defs>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff07a"/><stop offset=".28" stop-color="#ffd21a"/><stop offset=".62" stop-color="#ffb300"/><stop offset="1" stop-color="#e58b00"/></linearGradient>
+<linearGradient id="red" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff3b30"/><stop offset=".5" stop-color="#f3121b"/><stop offset="1" stop-color="#b90012"/></linearGradient>
+<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000" flood-opacity=".35"/></filter>
+</defs>
+<title id="title">TOP 1</title><desc id="desc">TOP 1 logo in red and yellow with crown and shopping cart.</desc>
+<rect x="12" y="12" width="876" height="336" rx="52" fill="#0a0a0a"/>
+<path d="M92 281 C230 330 355 325 465 292 C585 256 690 244 802 275" fill="none" stroke="url(#red)" stroke-width="26" stroke-linecap="round"/>
+<path d="M112 274 C252 312 360 306 470 278 C576 251 675 235 788 265" fill="none" stroke="url(#gold)" stroke-width="7" stroke-linecap="round"/>
+<g filter="url(#shadow)"><path d="M296 106 L338 42 L385 92 L450 31 L515 92 L562 42 L604 106 L584 156 H316 Z" fill="url(#gold)" stroke="#f7cf4a" stroke-width="6" stroke-linejoin="round"/><circle cx="338" cy="41" r="11" fill="url(#gold)"/><circle cx="450" cy="30" r="11" fill="url(#gold)"/><circle cx="562" cy="41" r="11" fill="url(#gold)"/></g>
+<g font-family="Arial, Helvetica, sans-serif" font-weight="900" font-style="italic" filter="url(#shadow)"><text x="110" y="222" font-size="158" fill="url(#red)" stroke="#fff" stroke-width="10" paint-order="stroke">TOP</text><text x="572" y="238" font-size="196" fill="url(#gold)" stroke="#fff" stroke-width="10" paint-order="stroke">1</text></g>
+<g transform="translate(344 236)" fill="none" stroke="url(#gold)" stroke-linecap="round" stroke-linejoin="round"><path d="M0 11 H30 L45 77 H116 L132 35 H44" stroke-width="10"/><path d="M40 25 H143" stroke-width="10"/><circle cx="63" cy="96" r="9" fill="url(#gold)" stroke="none"/><circle cx="112" cy="96" r="9" fill="url(#gold)" stroke="none"/><path d="M12 25 H2 M20 41 H6 M29 57 H11" stroke-width="6"/></g>
+</svg>
