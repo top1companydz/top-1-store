@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TOP 1 — Administration</title>
+<link rel="stylesheet" href="admin.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1"></script><script src="supabase-config.js"></script></head>
+<body><main class="admin-shell">
+<header class="admin-top"><a class="brand" href="index.html"><span class="brand-mark">1</span><span><strong>TOP 1</strong><small>ADMIN</small></span></a><div id="userArea"></div></header>
+
+<section id="authView" class="auth-card"><div><span class="eyebrow">ESPACE PRIVÉ</span><h1>Gérer votre boutique</h1><p>Ajoutez, modifiez, publiez et supprimez vos produits sans toucher au code.</p></div>
+<form id="authForm"><label>Email<input id="authEmail" type="email" required></label><label>Mot de passe<input id="authPassword" type="password" minlength="6" required></label><button class="btn primary">Se connecter</button><button type="button" class="btn ghost" id="signupBtn">Créer mon compte</button><p id="authMsg" class="msg"></p></form></section>
+
+<section id="notAdminView" class="auth-card" hidden><div><span class="eyebrow">PREMIÈRE CONFIGURATION</span><h1>Compte créé</h1><p>Votre compte est bien enregistré. Il doit maintenant être activé comme administrateur une seule fois.</p><p><strong id="notAdminEmail"></strong></p></div><div><p>Après activation, cette page deviendra votre tableau de bord permanent.</p><button class="btn ghost" id="logoutBtn1">Se déconnecter</button></div></section>
+
+<section id="dashboard" hidden>
+<div class="stats" id="stats"></div>
+<div class="tabs"><button class="tab active" data-tab="products">Produits</button><button class="tab" data-tab="categories">Catégories</button><button class="tab" data-tab="orders">Commandes</button><button class="tab" data-tab="settings">Réglages</button></div>
+
+<div id="tab-products" class="panel tab-panel active"><div class="panel-head"><div><span class="eyebrow">CATALOGUE</span><h2>Produits</h2></div><button class="btn primary" id="newProductBtn">+ Ajouter un produit</button></div><div class="table-wrap"><table><thead><tr><th>Produit</th><th>Catégorie</th><th>Prix</th><th>Stock</th><th>Statut</th><th></th></tr></thead><tbody id="productsTable"></tbody></table></div></div>
+
+<div id="tab-categories" class="panel tab-panel"><div class="panel-head"><div><span class="eyebrow">ORGANISATION</span><h2>Catégories</h2></div></div><form id="categoryForm" class="inline-form"><input name="name" placeholder="Nom de catégorie" required><input name="description" placeholder="Description"><button class="btn primary">Ajouter</button></form><div id="categoriesList" class="list"></div></div>
+
+<div id="tab-orders" class="panel tab-panel"><div class="panel-head"><div><span class="eyebrow">VENTES</span><h2>Commandes</h2></div><button class="btn ghost" id="refreshOrders">Actualiser</button></div><div id="ordersList" class="orders-list"></div></div>
+
+<div id="tab-settings" class="panel tab-panel"><div class="panel-head"><div><span class="eyebrow">BOUTIQUE</span><h2>Réglages</h2></div></div><form id="settingsForm" class="form-grid"><label>Nom de la boutique<input name="store_name"></label><label>WhatsApp<input name="whatsapp_phone" placeholder="2135..."></label><label>Paiement<input name="payment_method"></label><button class="btn primary wide">Enregistrer</button></form></div>
+</section></main>
+
+<div class="modal" id="productModal"><div class="modal-card"><button class="modal-close" id="closeProduct">×</button><span class="eyebrow">PRODUIT</span><h2 id="productModalTitle">Ajouter un produit</h2><form id="productForm" class="form-grid"><input type="hidden" name="id">
+<label>Nom<input name="name" required></label><label>SKU<input name="sku"></label><label>Catégorie<select name="category_id" id="productCategory"></select></label><label>Prix (DA)<input name="price_dzd" type="number" min="0" required></label><label>Prix avant remise<input name="compare_at_price_dzd" type="number" min="0"></label><label>Stock<input name="stock_qty" type="number" min="0" required></label><label class="wide">Description<textarea name="description" rows="4"></textarea></label><label>Photo<input name="image" type="file" accept="image/*"></label><label class="checks"><span><input type="checkbox" name="is_active" checked> Visible</span><span><input type="checkbox" name="is_featured"> En vedette</span></label><div class="wide" id="currentImage"></div><button class="btn primary wide">Enregistrer le produit</button></form></div></div>
+<div class="toast" id="toast"></div><script src="admin.js"></script></body></html>
