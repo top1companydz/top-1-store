@@ -111,4 +111,18 @@
 @media(max-width:980px){.shopify-product{grid-template-columns:1fr;gap:30px}.gallery-main{height:520px;min-height:420px}.product-info-column{max-width:760px;margin:auto;width:100%}.thumbnail-strip{grid-template-columns:repeat(5,1fr)}}
 @media(max-width:560px){.product-page{padding-top:18px}.gallery-main{height:360px}.thumbnail-strip{grid-template-columns:repeat(4,1fr);gap:7px}.buy-row{flex-direction:column}.quantity-control{width:max-content}.quick-order-card{padding:14px}.quick-order-head{flex-direction:column}.success-actions{flex-direction:column}}
 
-[hidden]{display:none!important}.product-state{display:grid;min-height:340px;place-items:center}.product-state.error{color:#a33c3c}
+[hidden]{display:none!important}.product-state{display:grid;min-height:340px;place-items:center}.product-state.error{color:#a33c3c} 
+.product-cart-drawer{position:fixed;top:0;right:-430px;width:min(430px,92vw);height:100vh;background:#fff;z-index:120;box-shadow:-16px 0 45px rgba(0,0,0,.15);display:flex;flex-direction:column;transition:right .25s ease}
+.product-cart-drawer.open{right:0}
+.product-cart-drawer .drawer-head{padding:22px;border-bottom:1px solid #e8e4dd;display:flex;justify-content:space-between;align-items:center}
+.product-cart-drawer .drawer-head h3{font:800 21px Manrope;margin:4px 0 0}
+.product-cart-drawer .cart-items{padding:18px;overflow:auto;flex:1}
+.product-cart-drawer .drawer-footer{padding:18px;border-top:1px solid #e8e4dd}
+.product-cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:110;opacity:0;visibility:hidden;transition:.2s}
+.product-cart-overlay.open{opacity:1;visibility:visible}
+.product-cart-row{display:grid;grid-template-columns:62px 1fr auto;gap:11px;align-items:start;padding:13px 0;border-bottom:1px solid #eee}
+.product-cart-thumb{width:62px;height:62px;border-radius:9px;background:#f0eee9;overflow:hidden;display:grid;place-items:center}.product-cart-thumb img{width:100%;height:100%;object-fit:cover}.product-cart-thumb span{font-size:8px;font-weight:800;color:#9b958b}
+.product-cart-copy{display:flex;flex-direction:column;gap:4px;min-width:0}.product-cart-copy strong{font-size:12px}.product-cart-copy small{font-size:9px;color:#777;line-height:1.35}.product-cart-qty{display:flex;align-items:center;gap:6px;margin-top:3px}.product-cart-qty button{width:22px;height:22px;border:1px solid #ddd8cf;background:#fff;border-radius:5px;cursor:pointer}.product-cart-row>strong{font-size:11px;white-space:nowrap}.product-cart-empty{text-align:center;color:#777;font-size:12px;padding:55px 10px}
+.product-cart-drawer .cart-total{display:flex;justify-content:space-between;margin-bottom:13px;font-size:13px}.product-cart-drawer .cart-total strong{font:800 18px Manrope}
+.product-cart-drawer .full{width:100%;justify-content:center}
+@media(max-width:560px){.product-cart-drawer{width:94vw}}
