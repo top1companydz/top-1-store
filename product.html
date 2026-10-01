@@ -33,134 +33,109 @@
   </header>
 
   <main class="product-page container">
-    <div id="productState" class="product-state">Chargement du produit…</div>
+  <div id="productState" class="product-state">Chargement du produit…</div>
 
-    <section id="productContent" class="product-detail" hidden>
-      <div class="gallery">
-        <div class="gallery-main">
-          <button class="gallery-arrow left" id="prevImage" aria-label="Photo précédente">‹</button>
-          <img id="mainImage" alt="" />
-          <div id="mainPlaceholder" class="gallery-placeholder" hidden>TOP 1</div>
-          <button class="gallery-arrow right" id="nextImage" aria-label="Photo suivante">›</button>
-          <span id="imageCounter" class="image-counter"></span>
+  <section id="productContent" class="shopify-product" hidden>
+    <div class="product-gallery">
+      <div class="gallery-main">
+        <button class="gallery-arrow left" id="prevImage" aria-label="Photo précédente">‹</button>
+        <img id="mainImage" alt="" />
+        <div id="mainPlaceholder" class="gallery-placeholder" hidden>TOP 1</div>
+        <button class="gallery-arrow right" id="nextImage" aria-label="Photo suivante">›</button>
+        <span id="imageCounter" class="image-counter"></span>
+      </div>
+      <div id="thumbnailStrip" class="thumbnail-strip"></div>
+    </div>
+
+    <div class="product-info-column">
+      <div class="breadcrumbs"><a href="index.html">Accueil</a><span>›</span><span id="productCategory"></span></div>
+      <div class="product-tag-row">
+        <span id="productBadge" class="detail-badge" hidden>TOP 1</span>
+        <span id="productSku" class="detail-sku"></span>
+      </div>
+      <h1 id="productName"></h1>
+      <p id="productDescriptionShort" class="detail-lead"></p>
+
+      <div class="shopify-price-line">
+        <span id="productPrice" class="detail-price"></span>
+        <span id="productCompare" class="detail-compare" hidden></span>
+      </div>
+      <div id="stockMessage" class="stock-message"></div>
+
+      <div id="variantOptions" class="variant-options"></div>
+
+      <div class="buy-row">
+        <div class="quantity-control">
+          <button id="qtyMinus" type="button" aria-label="Diminuer la quantité">−</button>
+          <span id="qtyValue">1</span>
+          <button id="qtyPlus" type="button" aria-label="Augmenter la quantité">+</button>
         </div>
-        <div id="thumbnailStrip" class="thumbnail-strip"></div>
+        <button id="addToCart" class="btn btn-outline add-cart-btn" type="button">Ajouter au panier</button>
       </div>
 
-      <div class="product-summary reference-summary">
-        <div class="breadcrumbs"><a href="index.html">Accueil</a><span>›</span><span id="productCategory"></span></div>
-        <div class="reference-title-row">
+      <a id="whatsappProduct" class="whatsapp-product" href="#" target="_blank" rel="noopener">💬 Nous contacter sur WhatsApp</a>
+
+      <section class="quick-order-card" aria-label="Commande rapide">
+        <div class="quick-order-head">
           <div>
-            <span id="productBadge" class="detail-badge" hidden>TOP 1</span>
-            <span id="productSku" class="detail-sku"></span>
-            <h1 id="productName"></h1>
-            <p id="productDescriptionShort" class="detail-lead"></p>
+            <span class="eyebrow">COMMANDE RAPIDE</span>
+            <h2>Acheter ce produit</h2>
+            <p>Nom, téléphone et wilaya. Nous vous appelons pour confirmer.</p>
           </div>
+          <span class="yalidine-badge">YALIDINE</span>
         </div>
 
-        <div class="reference-price-row">
-          <strong id="productPrice" class="detail-price"></strong>
-          <span id="productCompare" class="detail-compare" hidden></span>
+        <form id="productOrderForm" class="quick-order-form">
+          <label>Nom complet <em>*</em><input name="customer_name" autocomplete="name" required placeholder="Votre nom et prénom"></label>
+          <label>Numéro de téléphone <em>*</em><input name="phone" autocomplete="tel" required inputmode="tel" placeholder="05 / 06 / 07 ..."></label>
+          <label>Wilaya <em>*</em><select name="wilaya" id="productWilaya" required><option value="">Sélectionnez votre wilaya</option></select></label>
+
+          <div class="order-summary-box">
+            <div class="selected-line">
+              <div class="selected-mini"><img id="miniProductImage" alt="" hidden><span id="miniProductPlaceholder">TOP 1</span></div>
+              <div class="selected-copy"><strong id="miniProductName"></strong><small id="miniProductOptions"></small><span>Quantité : <b id="miniProductQty">1</b></span></div>
+              <strong id="miniProductLine">0 DA</strong>
+            </div>
+            <div class="summary-line"><span>Sous-total</span><strong id="orderProductPrice">0 DA</strong></div>
+            <div class="summary-line"><span>Expédition Yalidine</span><strong id="orderDeliveryPrice">?</strong></div>
+            <div class="summary-line total"><span>Total à payer</span><strong id="orderTotalPrice">0 DA</strong></div>
+            <p id="orderDeliveryHint" class="delivery-hint">Sélectionnez votre wilaya pour calculer la livraison.</p>
+          </div>
+
+          <button id="buyNow" class="buy-now-primary" type="submit" disabled>ACHETER MAINTENANT — 0 DA</button>
+          <small class="order-note">Paiement à la livraison. Nous vous contacterons pour confirmer avant l’expédition.</small>
+        </form>
+
+        <div id="orderSuccess" class="order-success" hidden>
+          <div class="success-icon">✓</div>
+          <span class="eyebrow">COMMANDE ENREGISTRÉE</span>
+          <h3>Merci pour votre commande</h3>
+          <p>Votre commande <strong id="successOrderNumber"></strong> est bien enregistrée.</p>
+          <div id="successSummary" class="success-summary"></div>
+          <div class="success-actions">
+            <button id="copyOrder" class="btn btn-outline" type="button">Copier</button>
+            <a id="successWhatsapp" class="btn btn-dark" href="#" target="_blank" rel="noopener">WhatsApp ↗</a>
+          </div>
         </div>
-        <div id="stockMessage" class="stock-message"></div>
+      </section>
 
-        <div id="variantOptions" class="variant-options"></div>
-
-        <div class="reference-order-preview">
-          <div class="preview-product">
-            <div class="preview-thumb"><img id="miniProductImage" alt="" hidden /><span id="miniProductPlaceholder">TOP 1</span></div>
-            <div class="preview-copy">
-              <strong id="miniProductName"></strong>
-              <small id="miniProductOptions"></small>
-              <span><b id="miniProductQty">1</b> article</span>
-            </div>
-            <strong id="miniProductLine">0 DA</strong>
-          </div>
-          <div class="reference-totals">
-            <div><span>Sous-total</span><strong id="orderProductPrice">0 DA</strong></div>
-            <div><span>Expédition</span><strong id="orderDeliveryPrice">?</strong></div>
-            <div class="reference-grand-total"><span>Total</span><strong id="orderTotalPrice">0 DA</strong></div>
-          </div>
-        </div>
-
-        <section class="order-sheet reference-order-sheet" aria-label="Formulaire de commande">
-          <div class="order-sheet-head">
-            <div>
-              <span class="eyebrow">COMMANDE</span>
-              <h2>Finalisez votre achat</h2>
-              <p>Remplissez vos informations. Nous vous contacterons pour confirmer la commande et la livraison.</p>
-            </div>
-            <span class="order-sheet-badge">YALIDINE</span>
-          </div>
-
-          <form id="productOrderForm" class="order-sheet-form">
-            <div class="form-two">
-              <label><span class="field-label">👤 Nom <em>*</em></span><input name="customer_name" autocomplete="name" required placeholder="Nom et prénom"></label>
-              <label><span class="field-label">☎ Téléphone <em>*</em></span><input name="phone" autocomplete="tel" required inputmode="tel" placeholder="05 / 06 / 07 ..."></label>
-            </div>
-            <label><span class="field-label">📍 Wilaya <em>*</em></span><select name="wilaya" id="productWilaya" required><option value="">Choisissez votre wilaya</option></select></label>
-
-            <div class="reference-delivery-note" id="orderDeliveryHint">Sélectionnez votre wilaya pour calculer les frais de livraison.</div>
-
-            <button id="qtyMinus" class="hidden-control" type="button" aria-label="Diminuer la quantité">−</button>
-            <input type="hidden" id="qtyValue" value="1" />
-            <button id="qtyPlus" class="hidden-control" type="button" aria-label="Augmenter la quantité">+</button>
-
-            <button id="buyNow" class="btn btn-dark order-submit reference-buy" type="submit" disabled>ACHETER MAINTENANT — 0 DA</button>
-          </form>
-
-          <div id="orderSuccess" class="order-success" hidden>
-            <div class="success-icon">✓</div>
-            <span class="eyebrow">COMMANDE ENREGISTRÉE</span>
-            <h3>Merci pour votre commande</h3>
-            <p>Votre commande <strong id="successOrderNumber"></strong> a bien été enregistrée. Nous vous contacterons pour confirmer la livraison.</p>
-            <div id="successSummary" class="success-summary"></div>
-            <div class="success-actions">
-              <button id="copyOrder" class="btn btn-outline" type="button">Copier le récapitulatif</button>
-              <a id="successWhatsapp" class="btn btn-dark" href="#" target="_blank" rel="noopener">Contacter TOP 1 sur WhatsApp ↗</a>
-            </div>
-          </div>
-        </section>
-
-        <a id="whatsappProduct" class="whatsapp-product reference-whatsapp" href="#" target="_blank" rel="noopener">WhatsApp — Nous contacter ↗</a>
+      <div class="accordions">
+        <details open><summary>Description</summary><div id="fullDescription" class="accordion-body rich-text"></div></details>
+        <details><summary>Spécifications</summary><div id="specTable" class="accordion-body spec-table"></div></details>
+        <details><summary>Livraison</summary><div class="accordion-body">Livraison avec Yalidine. Le tarif est calculé selon la wilaya sélectionnée.</div></details>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="detailsSection" class="detail-section" hidden>
-      <div class="detail-tabs">
-        <button class="detail-tab active" data-tab="description">Description</button>
-        <button class="detail-tab" data-tab="specifications">Spécifications</button>
-        <button class="detail-tab" data-tab="delivery">Livraison & commande</button>
-      </div>
-      <div class="detail-panel active" id="panel-description">
-        <h2>À propos de ce produit</h2>
-        <div id="fullDescription" class="rich-text"></div>
-      </div>
-      <div class="detail-panel" id="panel-specifications">
-        <h2>Spécifications</h2>
-        <div id="specTable" class="spec-table"></div>
-      </div>
-      <div class="detail-panel" id="panel-delivery">
-        <h2>Livraison & commande</h2>
-        <div class="delivery-grid">
-          <div><strong>1.</strong><p>Choisissez vos options.</p></div>
-          <div><strong>2.</strong><p>Renseignez vos coordonnées et votre wilaya.</p></div>
-          <div><strong>3.</strong><p>Le total est calculé avec l'expédition.</p></div>
-          <div><strong>4.</strong><p>Nous vous contactons pour confirmer.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="relatedSection" class="related-section" hidden>
-      <div class="section-head">
-        <div><span class="eyebrow">VOUS AIMEREZ AUSSI</span><h2>Produits similaires</h2></div>
-        <a class="text-link" href="index.html#featured">Voir toute la sélection →</a>
-      </div>
-      <div id="relatedGrid" class="related-grid"></div>
-    </section>
-  </main>
-
-  <footer id="contact">
+  <section id="relatedSection" class="related-section" hidden>
+    <div class="section-head">
+      <div><span class="eyebrow">VOUS AIMEREZ AUSSI</span><h2>Produits similaires</h2></div>
+      <a class="text-link" href="index.html#featured">Voir toute la sélection →</a>
+    </div>
+    <div id="relatedGrid" class="related-grid"></div>
+  </section>
+</main>
+<footer id="contact">
     <div class="container footer-grid">
       <div><a class="brand footer-brand" href="index.html"><span class="brand-mark">1</span><span><strong>TOP 1</strong><small>DZ</small></span></a><p>Mode, maison, workwear, jouets et quotidien — sélectionnés pour l'Algérie.</p></div>
       <div><h4>Boutique</h4><a href="index.html#categories">Catégories</a><a href="index.html#featured">Produits</a><a href="index.html#why-us">Pourquoi nous</a></div>
