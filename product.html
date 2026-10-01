@@ -70,7 +70,48 @@
           </div>
           <button id="addToCart" class="btn btn-dark purchase-btn">Ajouter au panier</button>
         </div>
-        <button id="buyNow" class="buy-now">Commander ce produit sur WhatsApp ↗</button>
+
+        <a id="whatsappProduct" class="whatsapp-product" href="#" target="_blank" rel="noopener">WhatsApp — Nous contacter ↗</a>
+
+        <section class="order-sheet" aria-label="Formulaire de commande">
+          <div class="order-sheet-head">
+            <div><span class="eyebrow">COMMANDE DIRECTE</span><h2>Achetez ce produit</h2><p>Remplissez vos coordonnées. Votre commande sera enregistrée et notre équipe vous contactera pour confirmer la livraison.</p></div>
+            <span class="order-sheet-badge">YALIDINE</span>
+          </div>
+          <form id="productOrderForm" class="order-sheet-form">
+            <div class="form-two">
+              <label>Nom complet *<input name="customer_name" autocomplete="name" required placeholder="Nom et prénom"></label>
+              <label>Téléphone *<input name="phone" autocomplete="tel" required inputmode="tel" placeholder="05 / 06 / 07 ..."></label>
+            </div>
+            <div class="form-two">
+              <label>Wilaya *<select name="wilaya" id="productWilaya" required><option value="">Choisissez votre wilaya</option></select></label>
+              <label>Commune<input name="commune" autocomplete="address-level2" placeholder="Votre commune"></label>
+            </div>
+            <label>Adresse de livraison<input name="address" autocomplete="street-address" placeholder="Quartier, rue, numéro..."></label>
+            <label>Note (optionnel)<textarea name="notes" rows="3" placeholder="Une précision pour la livraison ?"></textarea></label>
+
+            <div class="order-calculator">
+              <div><span>Produit</span><strong id="orderProductPrice">0 DA</strong></div>
+              <div><span>Livraison Yalidine</span><strong id="orderDeliveryPrice">—</strong></div>
+              <div class="order-total"><span>Total à payer</span><strong id="orderTotalPrice">0 DA</strong></div>
+              <p id="orderDeliveryHint">Sélectionnez votre wilaya pour calculer automatiquement la livraison.</p>
+            </div>
+
+            <button id="buyNow" class="btn btn-dark buy-now order-submit" type="submit">Acheter maintenant</button>
+          </form>
+
+          <div id="orderSuccess" class="order-success" hidden>
+            <div class="success-icon">✓</div>
+            <span class="eyebrow">COMMANDE ENREGISTRÉE</span>
+            <h3>Merci pour votre commande</h3>
+            <p>Votre commande <strong id="successOrderNumber"></strong> a bien été enregistrée. Nous vous contacterons pour confirmer la livraison.</p>
+            <div id="successSummary" class="success-summary"></div>
+            <div class="success-actions">
+              <button id="copyOrder" class="btn btn-outline" type="button">Copier le récapitulatif</button>
+              <a id="successWhatsapp" class="btn btn-dark" href="#" target="_blank" rel="noopener">Contacter TOP 1 sur WhatsApp ↗</a>
+            </div>
+          </div>
+        </section>
 
         <div class="trust-grid">
           <div><span>✓</span><strong>Paiement à la livraison</strong><small>Selon les conditions de livraison affichées</small></div>
