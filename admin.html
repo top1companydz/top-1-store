@@ -19,7 +19,11 @@
 
 <div id="tab-orders" class="panel tab-panel"><div class="panel-head"><div><span class="eyebrow">VENTES</span><h2>Commandes</h2></div><button class="btn ghost" id="refreshOrders">Actualiser</button></div><div id="ordersList" class="orders-list"></div></div>
 
-<div id="tab-settings" class="panel tab-panel"><div class="panel-head"><div><span class="eyebrow">BOUTIQUE</span><h2>Réglages</h2></div></div><form id="settingsForm" class="form-grid"><label>Nom de la boutique<input name="store_name"></label><label>WhatsApp<input name="whatsapp_phone" placeholder="2135..."></label><label>Paiement<input name="payment_method"></label><button class="btn primary wide">Enregistrer</button></form></div>
+<div id="tab-settings" class="panel tab-panel"><div class="panel-head"><div><span class="eyebrow">BOUTIQUE</span><h2>Réglages</h2></div></div><form id="settingsForm" class="form-grid"><label>Nom de la boutique<input name="store_name"></label><label>WhatsApp<input name="whatsapp_phone" placeholder="2135..."></label><label>Paiement<input name="payment_method"></label><button class="btn primary wide">Enregistrer</button></form><div class="delivery-admin wide">
+  <div class="delivery-admin-head"><div><span class="eyebrow">LIVRAISON</span><h3>Tarifs par wilaya</h3><p>Entrez le prix de livraison appliqué à chaque wilaya. Le client verra automatiquement ce montant dans son panier.</p></div><button type="button" class="btn ghost" id="refreshDeliveryRates">Actualiser</button></div>
+  <div class="delivery-rate-grid" id="deliveryRatesList"></div>
+  <button type="button" class="btn primary" id="saveDeliveryRates">Enregistrer les tarifs de livraison</button>
+</div></div>
 </section></main>
 
 <div class="modal" id="productModal"><div class="modal-card"><button class="modal-close" id="closeProduct">×</button><span class="eyebrow">PRODUIT</span><h2 id="productModalTitle">Ajouter un produit</h2><form id="productForm" class="form-grid"><input type="hidden" name="id">
