@@ -64,3 +64,4 @@
   .thumbnail-strip{grid-template-columns:repeat(4,1fr)}
   .form-two{grid-template-columns:1fr}
 }
+ .reference-buy{background:linear-gradient(135deg,#171717 0%,#2d2822 55%,#c69b61 160%);color:#fff;border:1px solid #171717;box-shadow:0 10px 22px rgba(23,23,23,.16);font-weight:900;text-shadow:0 1px 0 rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;visibility:visible;opacity:1}.reference-buy:hover:not(:disabled){background:linear-gradient(135deg,#c69b61 0%,#b1834c 60%,#171717 160%);color:#fff}.reference-buy:disabled{background:#c9c4bb;color:#fff;opacity:1;box-shadow:none}.thumbnail-strip .thumb-btn{min-width:0}.reference-order-sheet{margin-top:13px}.order-sheet-form{gap:9px}.order-sheet-form input,.order-sheet-form select{height:46px}.reference-summary .order-sheet-form .form-two{grid-template-columns:1fr 1fr}.preview-thumb img{object-fit:cover}.color-image-note{font-size:9px;color:var(--muted);margin-top:5px}
